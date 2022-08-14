@@ -67,3 +67,6 @@ Timestamp: Mon Aug 08 2022 18:00:16 GMT-0400 (Eastern Daylight Time)
 ::1 - - [14/Aug/2022:14:14:03 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
 ::1 - - [14/Aug/2022:14:14:13 +0000] "GET /documentation.html HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
 ::1 - - [14/Aug/2022:14:14:20 +0000] "GET /movies HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
+::ffff:192.168.1.1 - - [14/Aug/2022:14:18:38 +0000] "GET / HTTP/1.1" 200 20 "-" "-"
+::ffff:192.168.1.1 - - [14/Aug/2022:14:36:47 +0000] "GET / HTTP/1.1" 200 20 "-" "-"
+::ffff:192.168.1.1 - - [14/Aug/2022:14:41:09 +0000] "GET / HTTP/1.1" 200 20 "-" "-"
