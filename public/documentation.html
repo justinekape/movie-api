@@ -2,14 +2,188 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>myFlix</title>
+        <title>myFlix Documentation</title>
 
         <meta name="viewpport">
     </head>
     <body>
-        <h1>Movie API</h1>
+        <h1>MyFlix API</h1>
 
         <p>This is a REST API for an application called "myFlix" that interacts with a database that stores data about different movies.</p>
+
+        <div>
+            <h2>Status Codes</h2>
+            <strong>200</strong> "OK"<br>
+            <strong>201</strong> "Created"<br>
+            <strong>400</strong> "Bad Request"<br>
+            <strong>500</strong> "Internal Server Error"
+        </div>
+        
+        <div>
+            <h2>List of All Movies</h2>
+            <h3> URL: /movies</h3>
+            <h4>Method: GET</h4>
+            <p>
+                <strong>Description:</strong> This endpoint allows users to view a list of all the movies.<br><br>
+                <strong>Example</strong><br>
+                <strong>Request:</strong> localhost:8080/movies<br>
+                <strong>Response:</strong> array containing all the movies available.
+            </p>
+        </div>
+        <div>
+            <h2>Movie Details by Title</h2>
+            <h3>URL: /movies/:title</h3>
+            <h4>Method: GET </h4>
+            <p>
+                <strong>Description:</strong> This endpoint returns data about a movie including description, genre, and director.<br><br>
+                <strong>Example</strong><br>
+                <strong>Request:</strong> localhost:8080/movies/The%20Lord%20of%20the%20Rings<br>
+                <strong>Response:</strong><br>
+                <code>
+                    {
+                        "title": "The Lord of the Rings",
+                        "genre": {
+                            "name": "high fantasy",
+                            "description": "High fantasy, or epic fantasy, is a subgenre of fantasy defined by the epic nature of its setting or by the epic stature of its characters, themes or plot."
+                        },
+                        "director": {
+                            "name": "Peter Jackson",
+                            "bio": "Sir Peter Robert Jackson ONZ KNZM is a New Zealand film director, screenwriter and producer.",
+                            "birth year": "October 31, 1961"
+                        }
+                    }
+                </code>
+            </p>
+        </div>
+        <div>
+            <h2>Genre</h2>
+            <h3>URL: /movies/genre/:genreName</h3>
+            <h4>Method: GET </h4>
+            <p>
+                <strong>Description:</strong> This endpoint returns data about a genre.<br><br>
+                <strong>Example</strong><br>
+                <strong>Request:</strong> localhost:8080/movies/genre/high%20fantasy<br>
+                <strong>Response:</strong><br>
+                <code>
+                    {
+                        "name": 'high fantasy',
+                        "description": 'High fantasy, or epic fantasy, is a subgenre of fantasy defined by the epic nature of its setting or by the epic stature of its characters, themes or plot.'
+                    },
+                </code>
+            </p>
+        </div>
+        <div>
+            <h2>Director Information</h2>
+            <h3>URL: /movies/directors/:directorName</h3>
+            <h4>Method: GET </h4>
+            <p>
+                <strong>Description:</strong> This endpoint returns data about a director by name.<br><br>
+                <strong>Example</strong><br>
+                <strong>Request:</strong> localhost:8080/movies/directors/Peter%20Jackson<br>
+                <strong>Response:</strong><br>
+                <code>
+                    {
+                        "name": 'Peter Jackson',
+                        "bio": 'Sir Peter Robert Jackson ONZ KNZM is a New Zealand film director, screenwriter and producer.',
+                        "birth year": 'October 31, 1961'
+                    }
+                </code> 
+            </p>
+        </div> 
+        <div>
+            <h2>Add User</h2>
+            <h3>URL: /users</h3>
+            <h4>Method: POST</h4>
+            <p>
+                <strong>Description:</strong> This endpoint allows new users to register and assigns them a unique id. <br><br>
+                <strong>Example</strong><br>
+                <strong>Request:</strong> localhost:8080/users<br>
+                <strong>Response:</strong><br>
+                <code>
+                    {
+                        "name": "Mary",
+                        "favoriteMovies": [],
+                        "id": "1c512b76-43e5-4de5-bea0-d4e98ea14428"
+                    }
+                </code>
+            </p>
+        </div>
+        <div>
+            <h2>Allow Users to Update Information</h2>
+            <h3> URL: /users/:id</h3>
+            <h4>Method: PUT</h4>
+            <p>
+                <strong>Description:</strong> This endpoint allows users to update their user info. <br><br>
+                <strong>Example</strong><br>
+                <strong>Request:</strong> localhost:8080/users/1 <br>
+                <strong>Response:</strong><br>
+                <code>
+                    {
+                        "id": 1,
+                        "name": "Kim Updated Name",
+                        "favoriteMovies": [
+                            "Venom"
+                        ]
+                    }
+                </code>
+            </p>
+        </div>
+        <div>
+            <h2>Add Movie to Favorites</h2>
+            <h3> URL: /users/:id/:movieTitle</h3>
+            <h4>Method: POST </h4>
+            <p>
+                <strong>Description:</strong> This endpoint allows users to add a moive to their list of favorites. Once the movie has been added, a confirmation message will appear.<br><br>
+                <strong>Example</strong><br>
+                <strong>Request:</strong> localhost:8080/users/1/Coda<br>
+                <strong>Response:</strong><br>
+                <code>
+                    {
+                        "id": 1,
+                        "name": "Kim Updated Name",
+                        "favoriteMovies": [
+                            "Venom",
+                            "Coda"
+                        ]
+                    }
+                </code><br>
+                <p>Message: Coda has been added to Kim Updated Name's favorites</p>
+
+            </p>
+        </div>
+        <div>
+            <h2>Remove Movie From Favorites</h2>
+            <h3>URL: /users/:id/:movieTitle</h3>
+            <h4>Method: DELETE</h4>
+            <p>
+                <strong>Description:</strong> This endpoint allows users to remove a movie from their list of favorites. Once the movie has been removed, a confirmation message will appear.<br><br>
+                <strong>Example</strong><br>
+                <strong>Request:</strong> localhost:8080/users/2/Parasite<br>
+                <strong>Response:</strong><br>
+                <code>
+                    {
+                        "id": 2,
+                        "name": 'Harry',
+                        "favoriteMovies": [
+                        "V for Vendetta"
+                        ]
+                    },
+                </code>
+                <p>Message: Parasite has been removed from Harry's favorites</p>
+            </p>
+        </div>
+        <div>
+            <h2>Delete User</h2>
+            <h3>URL: /users/:id</h3>
+            <h4>Method: DELETE</h4>
+            <p>
+                <strong>Description:</strong> This endpoint allows exisitng users to deregister. Once their account has been deleted, a confirmation message will appear.<br><br>
+                <strong>Example</strong><br>
+                <strong>Request:</strong> localhost:8080/users/2 <br>
+                <strong>Response:</strong> Message: Harry has been deleted. 
+            </p>
+        </div>
+
         
     </body>
 </html>
