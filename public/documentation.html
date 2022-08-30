@@ -37,20 +37,24 @@
             <p>
                 <strong>Description:</strong> This endpoint returns data about a movie including description, genre, and director.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/movies/The%20Lord%20of%20the%20Rings<br>
+                <strong>Request:</strong> localhost:8080/movies/Spirited%20Away<br>
                 <strong>Response:</strong><br>
                 <code>
                     {
-                        "title": "The Lord of the Rings",
+                        "title": "Spirited Away",
+                        "description": "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts.",
                         "genre": {
-                            "name": "high fantasy",
-                            "description": "High fantasy, or epic fantasy, is a subgenre of fantasy defined by the epic nature of its setting or by the epic stature of its characters, themes or plot."
+                            "name": "Animation",
+                            "description": "Animation is a genre in which the film's images are primarily created by computer or hand and the characters are voiced by actors."
                         },
                         "director": {
-                            "name": "Peter Jackson",
-                            "bio": "Sir Peter Robert Jackson ONZ KNZM is a New Zealand film director, screenwriter and producer.",
-                            "birth year": "October 31, 1961"
-                        }
+                            "name": "Hayao Miyazaki",
+                            "bio": "Hayao Miyazaki is a Japanese animator, director, producer, screenwriter, author, and manga artist. A co-founder of Studio Ghibli, he has attained international acclaim as a masterful storyteller and creator of Japanese animated feature films, and is widely regarded as one of the most accomplished filmmakers in the history of animation.",
+                            "birth": "1941",
+                            "death": "-"
+                        },
+                        "imageUrl": "https://www.imdb.com/title/tt0245429/mediaviewer/rm4207852801/?ref_=ext_shr_lnk",
+                        "featured": true
                     }
                 </code>
             </p>
@@ -62,13 +66,13 @@
             <p>
                 <strong>Description:</strong> This endpoint returns data about a genre.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/movies/genre/high%20fantasy<br>
+                <strong>Request:</strong> localhost:8080/movies/genre/Animation<br>
                 <strong>Response:</strong><br>
                 <code>
                     {
-                        "name": 'high fantasy',
-                        "description": 'High fantasy, or epic fantasy, is a subgenre of fantasy defined by the epic nature of its setting or by the epic stature of its characters, themes or plot.'
-                    },
+                        "name": "Animation",
+                        "description": "Animation is a genre in which the film's images are primarily created by computer or hand and the characters are voiced by actors."
+                    }
                 </code>
             </p>
         </div>
@@ -79,13 +83,14 @@
             <p>
                 <strong>Description:</strong> This endpoint returns data about a director by name.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/movies/directors/Peter%20Jackson<br>
+                <strong>Request:</strong> localhost:8080/movies/directors/Kevin%20Ko<br>
                 <strong>Response:</strong><br>
                 <code>
                     {
-                        "name": 'Peter Jackson',
-                        "bio": 'Sir Peter Robert Jackson ONZ KNZM is a New Zealand film director, screenwriter and producer.',
-                        "birth year": 'October 31, 1961'
+                        "name": "Kevin Ko",
+                        "bio": "Taiwanese filmmaker Kevin KO came to prominence for a series of short films he made in college, including horror THE PRINT that screened at festivals in Japan and South Korea.",
+                        "birth": "1983",
+                        "death": "-"
                     }
                 </code> 
             </p>
@@ -101,9 +106,9 @@
                 <strong>Response:</strong><br>
                 <code>
                     {
-                        "name": "Mary",
+                        "name": "kim",
                         "favoriteMovies": [],
-                        "id": "1c512b76-43e5-4de5-bea0-d4e98ea14428"
+                        "id": "25814eb9-266c-4e3e-b814-4aaf5d717df0"
                     }
                 </code>
             </p>
@@ -120,10 +125,11 @@
                 <code>
                     {
                         "id": 1,
-                        "name": "Kim Updated Name",
-                        "favoriteMovies": [
-                            "Venom"
-                        ]
+                        "name": "kaul hilo",
+                        "password": "1234",
+                        "email": "kaulhilo@yahoo.com",
+                        "birthday": "1987-01-01",
+                        "favoriteMovies": []
                     }
                 </code>
             </p>
@@ -133,21 +139,21 @@
             <h3> URL: /users/:id/:movieTitle</h3>
             <h4>Method: POST </h4>
             <p>
-                <strong>Description:</strong> This endpoint allows users to add a moive to their list of favorites. Once the movie has been added, a confirmation message will appear.<br><br>
+                <strong>Description:</strong> This endpoint allows users to add a movie to their list of favorites. Once the movie has been added, a confirmation message will appear.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/users/1/Coda<br>
+                <strong>Request:</strong> localhost:8080/users/3/Spirited%20Away<br>
                 <strong>Response:</strong><br>
                 <code>
                     {
-                        "id": 1,
-                        "name": "Kim Updated Name",
-                        "favoriteMovies": [
-                            "Venom",
-                            "Coda"
-                        ]
-                    }
+                        id: 3,
+                        name: 'anden',
+                        password: '0987',
+                        email: 'emoryanden@gmail.com',
+                        birthday: "1990-01-01",
+                        favoriteMovies: ["Spirited Away"]
+                  },
                 </code><br>
-                <p>Message: Coda has been added to Kim Updated Name's favorites</p>
+                <p>Message: Spirited Away has been added to anden's favorites</p>
 
             </p>
         </div>
@@ -158,18 +164,19 @@
             <p>
                 <strong>Description:</strong> This endpoint allows users to remove a movie from their list of favorites. Once the movie has been removed, a confirmation message will appear.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/users/2/Parasite<br>
+                <strong>Request:</strong> localhost:8080/users/3/Spirited%20Away<br>
                 <strong>Response:</strong><br>
                 <code>
                     {
-                        "id": 2,
-                        "name": 'Harry',
-                        "favoriteMovies": [
-                        "V for Vendetta"
-                        ]
-                    },
+                        id: 3,
+                        name: 'anden',
+                        password: '0987',
+                        email: 'emoryanden@gmail.com',
+                        birthday: "1990-01-01",
+                        favoriteMovies: []
+                  },
                 </code>
-                <p>Message: Parasite has been removed from Harry's favorites</p>
+                <p>Message: Spirited Away has been removed from anden's favorites</p>
             </p>
         </div>
         <div>
@@ -180,7 +187,7 @@
                 <strong>Description:</strong> This endpoint allows exisitng users to deregister. Once their account has been deleted, a confirmation message will appear.<br><br>
                 <strong>Example</strong><br>
                 <strong>Request:</strong> localhost:8080/users/2 <br>
-                <strong>Response:</strong> Message: Harry has been deleted. 
+                <strong>Response:</strong> Message: shae has been deleted. 
             </p>
         </div>
 
