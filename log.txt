@@ -183,3 +183,4 @@ Timestamp: Mon Aug 08 2022 18:00:16 GMT-0400 (Eastern Daylight Time)
 ::1 - - [30/Aug/2022:21:47:11 +0000] "DELETE /users/3/Spirited%20Away HTTP/1.1" 200 53 "-" "PostmanRuntime/7.29.2"
 ::1 - - [30/Aug/2022:21:48:37 +0000] "DELETE /movies HTTP/1.1" 404 148 "-" "PostmanRuntime/7.29.2"
 ::1 - - [30/Aug/2022:21:48:41 +0000] "GET /movies HTTP/1.1" 200 8119 "-" "PostmanRuntime/7.29.2"
+::ffff:192.168.1.1 - - [30/Aug/2022:21:49:36 +0000] "GET / HTTP/1.1" 200 20 "-" "-"
