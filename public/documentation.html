@@ -32,58 +32,62 @@
         </div>
         <div>
             <h2>Movie Details by Title</h2>
-            <h3>URL: /movies/:title</h3>
+            <h3>URL: /movies/:Title</h3>
             <h4>Method: GET </h4>
             <p>
                 <strong>Description:</strong> This endpoint returns data about a movie including description, genre, and director.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/movies/Spirited%20Away<br>
+                <strong>Request:</strong> localhost:8080/movies/Prey<br>
                 <strong>Response:</strong><br>
                 <code>
                     {
-                        "title": "Spirited Away",
-                        "description": "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts.",
-                        "genre": {
-                            "name": "Animation",
-                            "description": "Animation is a genre in which the film's images are primarily created by computer or hand and the characters are voiced by actors."
-                        },
-                        "director": {
-                            "name": "Hayao Miyazaki",
-                            "bio": "Hayao Miyazaki is a Japanese animator, director, producer, screenwriter, author, and manga artist. A co-founder of Studio Ghibli, he has attained international acclaim as a masterful storyteller and creator of Japanese animated feature films, and is widely regarded as one of the most accomplished filmmakers in the history of animation.",
-                            "birth": "1941",
-                            "death": "-"
-                        },
-                        "imageUrl": "https://www.imdb.com/title/tt0245429/mediaviewer/rm4207852801/?ref_=ext_shr_lnk",
-                        "featured": true
+                        {
+                            "Genre": {
+                                "Name": "Horror",
+                                "Description": "Horror is a film genre that seeks to elicit fear or disgust in its audience for entertainment purposes."
+                            },
+                            "Director": {
+                                "Name": "Dan Trachtenberg",
+                                "Bio": "Dan Trachtenberg is an American filmmaker and podcast host. He directed the 2016 horror-thriller film 10 Cloverfield Lane which earned him a Directors Guild of America Award nomination for Outstanding Directing - First-Time Feature Film.",
+                                "Birth": "1981",
+                                "Death": "-"
+                            },
+                            "Actors": [],
+                            "_id": "630e4ab9940711d7c9246217",
+                            "Title": "Prey",
+                            "Description": "The origin story of the Predator in the world of the Comanche Nation 300 years ago. Naru, a skilled warrior, fights to protect her tribe against one of the first highly-evolved Predators to land on Earth.",
+                            "ImagePath": "https://www.imdb.com/title/tt11866324/mediaviewer/rm4094888705/?ref_=ext_shr_lnk",
+                            "Featured": true
+                        }
                     }
                 </code>
             </p>
         </div>
         <div>
             <h2>Genre</h2>
-            <h3>URL: /movies/genre/:genreName</h3>
+            <h3>URL: /genre/:Name</h3>
             <h4>Method: GET </h4>
             <p>
                 <strong>Description:</strong> This endpoint returns data about a genre.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/movies/genre/Animation<br>
+                <strong>Request:</strong> localhost:8080/genre/Animation<br>
                 <strong>Response:</strong><br>
                 <code>
                     {
-                        "name": "Animation",
-                        "description": "Animation is a genre in which the film's images are primarily created by computer or hand and the characters are voiced by actors."
+                        "Name": "Animation",
+                        "Description": "Animation is a genre in which the film's images are primarily created by computer or hand and the characters are voiced by actors."
                     }
                 </code>
             </p>
         </div>
         <div>
             <h2>Director Information</h2>
-            <h3>URL: /movies/directors/:directorName</h3>
+            <h3>URL: /director/:Name</h3>
             <h4>Method: GET </h4>
             <p>
                 <strong>Description:</strong> This endpoint returns data about a director by name.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/movies/directors/Kevin%20Ko<br>
+                <strong>Request:</strong> localhost:8080/director/Kevin%20Ko<br>
                 <strong>Response:</strong><br>
                 <code>
                     {
@@ -96,6 +100,17 @@
             </p>
         </div> 
         <div>
+            <h2>All Users</h2>
+            <h3>URL: /users</h3>
+            <h4>Method: GET </h4>
+            <p>
+                <strong>Description:</strong> This endpoint returns data about all users.<br><br>
+                <strong>Example</strong><br>
+                <strong>Request:</strong> localhost:8080/users<br>
+                <strong>Response:</strong> An array containing all users currently registered.
+            </p>
+        </div> 
+        <div>
             <h2>Add User</h2>
             <h3>URL: /users</h3>
             <h4>Method: POST</h4>
@@ -104,90 +119,124 @@
                 <strong>Example</strong><br>
                 <strong>Request:</strong> localhost:8080/users<br>
                 <strong>Response:</strong><br>
+                <strong>Input:</strong><br>
                 <code>
                     {
-                        "name": "kim",
-                        "favoriteMovies": [],
-                        "id": "25814eb9-266c-4e3e-b814-4aaf5d717df0"
+                        "Username": "newUser",
+                        "Password": "newpass",
+                        "Email": "pass123",
+                        "Birthday": "1995-12-12"
+                    }
+                    
+                </code><br>
+                <strong>Output:</strong><br>
+                <code>
+                    {
+                        "Username": "newUser",
+                        "Password": "newpass",
+                        "Email": "pass123",
+                        "Birthday": "1995-12-12T00:00:00.000z"
+                        "FavoriteMovies": [],
+                        "_id":"631617d4fd7a46e3£6327e69",
+                        "__v": 0
                     }
                 </code>
             </p>
         </div>
         <div>
             <h2>Allow Users to Update Information</h2>
-            <h3> URL: /users/:id</h3>
+            <h3> URL: /users/:Username</h3>
             <h4>Method: PUT</h4>
             <p>
                 <strong>Description:</strong> This endpoint allows users to update their user info. <br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/users/1 <br>
+                <strong>Request:</strong> localhost:8080/users/hilo <br>
                 <strong>Response:</strong><br>
+                <strong>Input:</strong><br>
                 <code>
                     {
-                        "id": 1,
-                        "name": "kaul hilo",
-                        "password": "1234",
-                        "email": "kaulhilo@yahoo.com",
-                        "birthday": "1987-01-01",
-                        "favoriteMovies": []
+                        "Username": "anden",
+                        "Password": "updatedPassword",
+                        "Email": "emoryanden@gmail.com"
+                        "Birthday": "1990-01-01"
                     }
+                </code><br>
+                <strong>Output:</strong><br>
+                <code>
+                    {
+                        "_id": "630e56b3940711d7c9246220",
+                        "Username": "anden",
+                        "Password": "updatedPassword",
+                        "Email": "emoryanden@gmail.com",
+                        "Birthday": "1990-01-01T00:00:00.000Z",
+                        "FavoriteMovies": [
+                            "630e6ff073d830bca8fd52aa",
+                            "630d22c5f9d2709917d1faf7"
+                        ]
+                    },
                 </code>
             </p>
         </div>
         <div>
             <h2>Add Movie to Favorites</h2>
-            <h3> URL: /users/:id/:movieTitle</h3>
+            <h3> URL: /users/:Username/movies/:MovieID</h3>
             <h4>Method: POST </h4>
             <p>
-                <strong>Description:</strong> This endpoint allows users to add a movie to their list of favorites. Once the movie has been added, a confirmation message will appear.<br><br>
+                <strong>Description:</strong> This endpoint allows users to add a movie to their list of favorites.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/users/3/Spirited%20Away<br>
+                <strong>Request:</strong> localhost:8080/users/hilo/movies/630d22c5f9d2709917d1faf7<br>
                 <strong>Response:</strong><br>
                 <code>
                     {
-                        id: 3,
-                        name: 'anden',
-                        password: '0987',
-                        email: 'emoryanden@gmail.com',
-                        birthday: "1990-01-01",
-                        favoriteMovies: ["Spirited Away"]
-                  },
+                        "_id": "630e5694940711d7c924621e",
+                        "Username": "hilo",
+                        "Password": "1234",
+                        "Email": "kaulhilo@yahoo.com",
+                        "Birthday": "1987-01-01T00:00:00.000z"
+                        "FavoriteMovies": [
+                            "630e702373d830bca8fd52ac",
+                            "630e4bcb940711d7c9246218",
+                            "6304ab9940711d7c9246217",
+                            "630d22c5f9d2709917d1faf7"
+                        ]
+                  }
                 </code><br>
-                <p>Message: Spirited Away has been added to anden's favorites</p>
-
             </p>
         </div>
         <div>
             <h2>Remove Movie From Favorites</h2>
-            <h3>URL: /users/:id/:movieTitle</h3>
+            <h3>URL: /users/:Username/movies/:MovieID</h3>
             <h4>Method: DELETE</h4>
             <p>
-                <strong>Description:</strong> This endpoint allows users to remove a movie from their list of favorites. Once the movie has been removed, a confirmation message will appear.<br><br>
+                <strong>Description:</strong> This endpoint allows users to remove a movie from their list of favorites.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/users/3/Spirited%20Away<br>
+                <strong>Request:</strong> localhost:8080/users/hilo/movies/630d22c5f9d2709917d1faf7<br>
                 <strong>Response:</strong><br>
                 <code>
                     {
-                        id: 3,
-                        name: 'anden',
-                        password: '0987',
-                        email: 'emoryanden@gmail.com',
-                        birthday: "1990-01-01",
-                        favoriteMovies: []
-                  },
+                        "_id": "630e5694940711d7c924621e",
+                        "Username": "hilo",
+                        "Password": "1234",
+                        "Email": "kaulhilo@yahoo.com",
+                        "Birthday": "1987-01-01T00:00:00.000z"
+                        "FavoriteMovies": [
+                            "630e702373d830bca8fd52ac",
+                            "630e4bcb940711d7c9246218",
+                            "6304ab9940711d7c9246217",
+                        ]
+                  }
                 </code>
-                <p>Message: Spirited Away has been removed from anden's favorites</p>
             </p>
         </div>
         <div>
             <h2>Delete User</h2>
-            <h3>URL: /users/:id</h3>
+            <h3>URL: /users/:Username</h3>
             <h4>Method: DELETE</h4>
             <p>
                 <strong>Description:</strong> This endpoint allows exisitng users to deregister. Once their account has been deleted, a confirmation message will appear.<br><br>
                 <strong>Example</strong><br>
-                <strong>Request:</strong> localhost:8080/users/2 <br>
-                <strong>Response:</strong> Message: shae has been deleted. 
+                <strong>Request:</strong> localhost:8080/users/newUser <br>
+                <strong>Response:</strong> Message: newUser has been deleted. 
             </p>
         </div>
 
