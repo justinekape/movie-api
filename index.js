@@ -76,7 +76,7 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 // *** READ *** 
 
 // default response
-app.get('/', (req, res) => {
+app.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.send('Welcome to myFlix! What do you want to watch?');
 });
 
