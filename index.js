@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 const cors = require('cors');
 let allowedOrigins = ['https://localhost:8080', 'http://testsite.com'];
 
-app.use(corse({
+app.use(cors({
   origin: (origin, callback) => {
     if(!origin) return callback(null, true);
     if(allowedOrigins.indexOf(origin) === -1){ // if a specific origin isn't found on the list of allowed origins
