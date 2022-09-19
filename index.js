@@ -5,9 +5,8 @@ const express = require('express');
     bodyParser = require('body-parser');
      uuid = require('uuid');
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true}));
-
 const { check, validationResult } = require('express-validator');
+app.use(bodyParser.urlencoded({ extended: true}));
 
 const cors = require('cors');
 let allowedOrigins = ['https://localhost:8080', 'http://testsite.com'];
