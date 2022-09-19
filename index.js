@@ -206,10 +206,11 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
       return res.status(422),json({errors: errors.array() });
     }
 
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate({ Username: req.params.Username }, { $set: 
       {
         Username: req.body.Username,
-        Password: req.body.Password,
+        Password: hashedPassword,
         Email: req.body.Email,
         Birthday: req.body.Birthday
       }
@@ -222,10 +223,6 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
       } else {
         res.json(updatedUser);
       }
-  });
-  .catch((error) => {
-    console.error(error);
-    res.status(500).send('Error: ' + error);
   });
 });
 
