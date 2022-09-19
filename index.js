@@ -39,7 +39,12 @@ const Genres = Models.Genre;
 const Directors = Models.Director;
 
 // connects mongoose to db so it can perform CRUD ops on contained docs from within REST API
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+//local database
+// mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+
+//online database
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 app.use(morgan('combined', {stream: accessLogStream}));
 
