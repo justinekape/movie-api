@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator');
 app.use(bodyParser.urlencoded({ extended: true}));
 
 const cors = require('cors');
-let allowedOrigins = ['https://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['https://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -118,7 +118,7 @@ app.get('/', (req, res) => {
 });
 
 // all movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/movies', (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
