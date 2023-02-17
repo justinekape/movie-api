@@ -1,16 +1,16 @@
 const express = require('express');
-    morgan = require('morgan'),
+morgan = require('morgan'),
     fs = require('fs'),
     path = require('path');
-    bodyParser = require('body-parser');
-     uuid = require('uuid');
+bodyParser = require('body-parser');
+uuid = require('uuid');
 const app = express();
 const { check, validationResult } = require('express-validator');
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 const cors = require('cors');
-let allowedOrigins = ['https://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
+let allowedOrigins = ['https://localhost:8080', 'http://testsite.com'];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -143,7 +143,7 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 // *** READ *** 
 
 // default response
-app.get('/', (req, res) => {
+app.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.send('Welcome to myFlix! What do you want to watch?');
 });
 
@@ -222,37 +222,25 @@ app.get('/director/:Name', passport.authenticate('jwt', { session: false }), (re
 // *** UPDATE ***  
 
 // update user's info by username
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), 
-  [
-    check('Username', 'Username is required').isLength({min: 5}),
-    check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
-    check('Email', 'Email does not appear to be valid').isEmail()
-  ], (req, res) => {
-    let errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(422).json({errors: errors.array() });
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+    $set:
+    {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
     }
-
-    let hashedPassword = Users.hashPassword(req.body.Password);
-    Users.findOneAndUpdate({ Username: req.params.Username }, { $set: 
-      {
-        Username: req.body.Username,
-        Password: hashedPassword,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday
-      }
-    },
+  },
     { new: true },
     (err, updatedUser) => {
-      if(err) {
+      if (err) {
         console.error(err);
         res.status(500).send('Error: ' + err);
       } else {
         res.json(updatedUser);
       }
-  });
+    });
 });
 
 // *** DELETE *** 
