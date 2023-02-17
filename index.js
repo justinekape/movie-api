@@ -8,6 +8,7 @@ const app = express();
 const { check, validationResult } = require('express-validator');
 app.use(bodyParser.urlencoded({ extended: true}));
 
+
 const cors = require('cors');
 let allowedOrigins = ['https://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
 
@@ -16,13 +17,13 @@ app.use(cors({
     if(!origin) return callback(null, true);
     if(allowedOrigins.indexOf(origin) === -1){ // if a specific origin isn't found on the list of allowed origins
       let message = 'the CORS policy for this application doesn\'t allow access from origin ' + origin;
-      return callback(new Error(message ), false);
+      return callback(new Error(message), false);
     }
     return callback(null, true);
   }
 }));
 
-let auth = require('./auth')(app);
+// let auth = require('./auth')(app);
 
 const passport = require('passport');
 require('./passport');
@@ -52,6 +53,35 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 // *** CREATE ***  
+
+const jwtSecret = 'your_jwt_secret'; // has to be the same key used in JWTStrategy
+const jwt = require('jsonwebtoken');
+
+const generateJWTToken = (user) => {
+  return jwt.sign(user, jwtSecret, {
+    subject: user.Username, // username you're encoding in the JWT
+    expiresIn: '7d', // specifies that token will expire in 7 days
+    algorithm: 'HS256' // algorithm used to 'sign' or encode the values of the JWT
+  });
+}
+
+app.post('/login', (req, res) => {
+  passport.authenticate('local', { session: false }, (error, user, info) => {
+    if(error || !user) {
+      return res.status(400).json({
+        message: 'Something is not right',
+        user: user,
+      });
+    }
+    req.login(user, { session: false }, (error) => {
+      if (error) {
+        res.send(error);
+      }
+      let token = generateJWTToken(user.toJSON());
+      return res.json({ user, token });
+    });
+  })(req, res)
+});
 
 // add a user
 app.post('/users', 
@@ -118,7 +148,7 @@ app.get('/', (req, res) => {
 });
 
 // all movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
